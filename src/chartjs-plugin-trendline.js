@@ -1,15 +1,15 @@
 /*!
  * chartjs-plugin-trendline.js
- * Version: 0.2.2
+ * Version: 1.0.0
  *
- * Copyright 2020 Marcus Alsterfjord
+ * Copyright 2021 Marcus Alsterfjord
  * Released under the MIT license
  * https://github.com/Makanz/chartjs-plugin-trendline/blob/master/README.md
  *
  * Mod by: vesal: accept also xy-data so works with scatter
  */
 var pluginTrendlineLinear = {
-    id: "trendlineLinear",
+    id: "chartjs-plugin-trendline",
     afterDraw: function(chartInstance) {
         var yScale;
         var xScale;
@@ -137,8 +137,13 @@ LineFitter.prototype = {
 };
 
 // If we're in the browser and have access to the global Chart obj, register plugin automatically
-if (typeof window !== "undefined" && window.Chart)
-    window.Chart.plugins.register(pluginTrendlineLinear);
+if (typeof window !== undefined && window.Chart) {
+    if(window.Chart.hasOwnProperty('register')) {
+        window.Chart.register(pluginTrendlineLinear); 
+    } else {
+        window.Chart.plugins.register(pluginTrendlineLinear); 
+    }   
+}
 
 // Otherwise, try to export the plugin
 try {
