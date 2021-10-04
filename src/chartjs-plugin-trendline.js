@@ -147,13 +147,8 @@ LineFitter.prototype = {
 };
 
 // If we're in the browser and have access to the global Chart obj, register plugin automatically
-if (typeof window !== undefined && window.Chart) {
-  if (window.Chart.hasOwnProperty("register")) {
-    window.Chart.register(pluginTrendlineLinear);
-  } else {
-    window.Chart.plugins.register(pluginTrendlineLinear);
-  }
-}
+if (typeof window !== "undefined" && window.Chart)
+  window.Chart.register(pluginTrendlineLinear);
 
 // Otherwise, try to export the plugin
 try {
